@@ -25,14 +25,15 @@ jobs:
       - name: Build and push frontend image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./Front
+          file: ./Front/Dockerfile
           push: true
           build-args: |
             REACT_APP_BACKEND_ADDRESS=/weather
           tags: |
             deegot/gotfront:latest
             deegot/gotfront:${{ github.sha }}
-
+            
       - name: Connect to Tailscale
         uses: tailscale/github-action@v3
         with:
